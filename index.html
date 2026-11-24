@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- EDIT: your name + one-line description (this shows in Google results and LinkedIn link previews) -->
+  <title>Finlay [Surname] — Physics & Software</title>
+  <meta name="description" content="Physics student at the University of Edinburgh building ray tracers, quantum simulations and data visualisations.">
+  <meta property="og:title" content="Finlay [Surname] — Physics & Software">
+  <meta property="og:description" content="Ray tracing, quantum simulation, scientific visualisation.">
+  <!-- Optional: add a 1200x630 preview image at images/preview.jpg and uncomment -->
+  <!-- <meta property="og:image" content="https://YOURUSERNAME.github.io/images/preview.jpg"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --ink: #1b1d22;
+      --muted: #5d626d;
+      --line: #e2ded5;
+      --accent: #d4572a;      /* change this one colour to re-theme the whole site */
+      --accent-soft: #f6e3da;
+      --radius: 14px;
+      --max: 1080px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111317;
+        --surface: #191c22;
+        --ink: #eceae4;
+        --muted: #9aa0ab;
+        --line: #2a2e36;
+        --accent: #f0805a;
+        --accent-soft: #2d1f1a;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: "JetBrains Mono", monospace; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    nav .logo { font-weight: 600; text-decoration: none; }
+    nav ul { display: flex; gap: 24px; list-style: none; font-size: 0.92rem; }
+    nav ul a { text-decoration: none; color: var(--muted); }
+    nav ul a:hover { color: var(--ink); }
+
+    /* ---------- Hero ---------- */
+    header.hero { padding: 96px 0 72px; }
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    h1 {
+      font-family: "Fraunces", serif; font-weight: 600;
+      font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em;
+      max-width: 16ch;
+    }
+    .hero p.lede { margin-top: 24px; font-size: 1.15rem; color: var(--muted); max-width: 58ch; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 999px; font-weight: 500; font-size: 0.95rem;
+      text-decoration: none; border: 1px solid var(--line); background: var(--surface);
+      transition: transform .15s, border-color .15s;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: var(--ink); }
+    .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 64px 0; border-top: 1px solid var(--line); }
+    h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: 2rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 40px; }
+
+    /* ---------- Projects ---------- */
+    .projects { display: grid; gap: 28px; }
+    .project {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .project:nth-child(even) .media { order: 2; }
+    .media {
+      position: relative; min-height: 280px; background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .media img, .media video { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
+    .placeholder {
+      font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--muted);
+      text-align: center; padding: 20px;
+    }
+    /* Decorative placeholder art — delete once you add real images */
+    .ph-ray { background: radial-gradient(circle at 35% 40%, #ffd9a8 0 12%, #e0874f 13% 22%, transparent 23%), radial-gradient(circle at 68% 58%, #9fc6ff 0 10%, #4f74c7 11% 18%, transparent 19%), linear-gradient(180deg, #1d2333 0 60%, #3b3a45 60%); }
+    .ph-flight { background: radial-gradient(ellipse at 50% 55%, #2c5a6e 0 45%, transparent 46%), #0f2430; }
+    .ph-vqe { background: repeating-linear-gradient(90deg, transparent 0 38px, color-mix(in srgb, var(--accent) 35%, transparent) 38px 40px), var(--accent-soft); }
+    .ph-terrain { background: linear-gradient(180deg, #a9d3f0 0 45%, transparent 45%), radial-gradient(ellipse at 20% 100%, #4c8a4a 0 40%, transparent 41%), radial-gradient(ellipse at 70% 100%, #3d7040 0 50%, transparent 51%), #a9d3f0; }
+    .ph-ray .placeholder, .ph-flight .placeholder, .ph-terrain .placeholder { color: #ffffffcc; background: #00000055; border-radius: 8px; }
+
+    .body { padding: 32px; display: flex; flex-direction: column; }
+    .tag { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+    .project h3 { font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 600; margin: 6px 0 12px; line-height: 1.2; }
+    .project p { color: var(--muted); font-size: 0.97rem; }
+    .project ul.points { margin: 14px 0 0 18px; color: var(--muted); font-size: 0.93rem; }
+    .project ul.points li { margin-bottom: 4px; }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .stack span {
+      font-family: "JetBrains Mono", monospace; font-size: 0.75rem;
+      padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted);
+    }
+    .links { display: flex; gap: 16px; margin-top: auto; padding-top: 22px; font-size: 0.92rem; font-weight: 500; }
+    .links a { text-decoration: none; border-bottom: 1.5px solid var(--accent); }
+
+    /* ---------- Skills ---------- */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .skill-group { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .skill-group h4 { font-size: 0.95rem; margin-bottom: 10px; }
+    .skill-group p { color: var(--muted); font-size: 0.92rem; }
+
+    /* ---------- Other work ---------- */
+    .other { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .other-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: var(--surface); }
+    .other-card h4 { font-family: "Fraunces", serif; font-size: 1.2rem; font-weight: 600; margin: 4px 0 8px; }
+    .other-card p { color: var(--muted); font-size: 0.93rem; }
+
+    /* ---------- Contact / footer ---------- */
+    .contact { text-align: center; padding: 88px 0; }
+    .contact h2 { font-size: 2.4rem; }
+    .contact p { color: var(--muted); margin: 10px auto 28px; max-width: 48ch; }
+    .contact .cta { justify-content: center; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 0.85rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    @media (max-width: 760px) {
+      nav ul { display: none; }
+      .project { grid-template-columns: 1fr; }
+      .project:nth-child(even) .media { order: 0; }
+      .media { min-height: 220px; }
+      header.hero { padding: 64px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">Finlay [Surname]</a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#other">Other work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Physics · University of Edinburgh</div>
+      <!-- EDIT: one sentence that says what you do. Keep it concrete. -->
+      <h1>I build simulations, renderers and tools for seeing physics.</h1>
+      <p class="lede">
+        <!-- EDIT: 2–3 sentences. Who you are, what you're good at, what you're looking for. -->
+        I'm a physics student who likes turning equations into working software: from a ray tracer written
+        from scratch in C++ to variational quantum algorithms and live data visualisation.
+        Currently looking for <strong>[internships / graduate roles / research placements]</strong> in [area].
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See my work</a>
+        <!-- EDIT: put your CV PDF in the repo as cv.pdf -->
+        <a class="btn" href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        <a class="btn" href="https://github.com/YOURUSERNAME" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/YOURPROFILE" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="wrap">
+      <h2>Selected projects</h2>
+      <p class="section-sub">Things I've built, and what I learned building them.</p>
+
+      <div class="projects">
+
+        <!-- PROJECT 1 -->
+        <article class="project">
+          <div class="media ph-ray">
+            <!-- EDIT: replace the placeholder div with your render, e.g.
+                 <img src="images/raytracer.jpg" alt="Ray-traced scene with glossy spheres and soft shadows"> -->
+            <div class="placeholder">add render → images/raytracer.jpg</div>
+          </div>
+          <div class="body">
+            <span class="tag">Computer graphics</span>
+            <h3>Physically-based ray tracer in C++</h3>
+            <p>A Whitted-style and distributed ray tracer written from scratch, which loads PBRT-format scenes.</p>
+            <ul class="points">
+              <!-- EDIT: 2–3 specific things. Numbers and hard problems are more convincing than adjectives. -->
+              <li>[e.g. BVH acceleration: render time cut from X min to Y s]</li>
+              <li>[e.g. Soft shadows, glossy reflection, depth of field via distributed sampling]</li>
+              <li>[e.g. The hardest bug and how you found it]</li>
+            </ul>
+            <div class="stack"><span>C++</span><span>Linear algebra</span><span>Monte Carlo sampling</span></div>
+            <div class="links">
+              <!-- Check university rules before publishing coursework source code -->
+              <a href="#">Write-up</a>
+              <a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2 -->
+        <article class="project">
+          <div class="media ph-flight">
+            <div class="placeholder">add screenshot → images/flights.jpg</div>
+          </div>
+          <div class="body">
+            <span class="tag">Science outreach · Web</span>
+            <h3>Live flight emissions map</h3>
+            <p>A website that shows live flights with estimated CO₂ emissions, built for a physics education outreach module.</p>
+            <ul class="points">
+              <li>[e.g. How CO₂ per flight is estimated]</li>
+              <li>[e.g. Equal Earth vs Mercator projections: why map choice changes perception]</li>
+              <li>[e.g. Audience, and what you learned about communicating science]</li>
+            </ul>
+            <div class="stack"><span>JavaScript</span><span>[mapping lib]</span><span>[flight API]</span></div>
+            <div class="links">
+              <a href="#">Live site</a>
+              <a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3 -->
+        <article class="project">
+          <div class="media ph-vqe">
+            <div class="placeholder">add plot → images/vqe.png<br>(energy convergence or phase diagram)</div>
+          </div>
+          <div class="body">
+            <span class="tag">Quantum computing · Group project</span>
+            <h3>VQE on the XXZ spin chain</h3>
+            <p>Using the Variational Quantum Eigensolver to find ground states of the XXZ model and detect its phase transitions.</p>
+            <ul class="points">
+              <!-- Be clear about your part of the group work -->
+              <li>My role: [what you personally built]</li>
+              <li>[e.g. Ansatz choice / error mitigation approach]</li>
+              <li>[e.g. Key result vs exact diagonalisation]</li>
+            </ul>
+            <div class="stack"><span>Python</span><span>Qiskit</span><span>NumPy</span></div>
+            <div class="links">
+              <a href="#">Report</a>
+              <a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 4 -->
+        <article class="project">
+          <div class="media ph-terrain">
+            <!-- A looping clip works well here:
+                 <video src="images/terrain.mp4" autoplay muted loop playsinline></video> -->
+            <div class="placeholder">add GIF / clip → images/terrain.mp4</div>
+          </div>
+          <div class="body">
+            <span class="tag">Game development</span>
+            <h3>Procedural 2D terrain in Unity</h3>
+            <p>Procedurally generated 2D worlds.</p>
+            <ul class="points">
+              <li>[e.g. Noise functions used and how they're layered]</li>
+              <li>[e.g. Chunking / performance approach]</li>
+            </ul>
+            <div class="stack"><span>C#</span><span>Unity</span></div>
+            <div class="links">
+              <a href="#">Play / demo</a>
+              <a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="section-sub">Each of these is backed by something above.</p>
+      <div class="skills">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <p class="mono">C++ · Python · C# · JavaScript · [others]</p>
+        </div>
+        <div class="skill-group">
+          <h4>Scientific computing</h4>
+          <p>Numerical methods, Monte Carlo, NumPy/SciPy, Qiskit, data visualisation</p>
+        </div>
+        <div class="skill-group">
+          <h4>Physics</h4>
+          <p>Quantum mechanics, statistical mechanics, thermodynamics, optics</p>
+        </div>
+        <div class="skill-group">
+          <h4>Tools</h4>
+          <p>Git, Linux, Unity, [LaTeX, Jupyter, …]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OTHER WORK ================= -->
+  <section id="other">
+    <div class="wrap">
+      <h2>Other things I make</h2>
+      <p class="section-sub">Outside of code.</p>
+      <div class="other">
+        <div class="other-card">
+          <span class="tag">Film</span>
+          <h4>Comedy shorts</h4>
+          <p>I write, film and edit short comedy films. [Link to YouTube / Vimeo]</p>
+        </div>
+        <div class="other-card">
+          <span class="tag">Writing</span>
+          <h4><em>Tangerines, Tadpoles and Time Travel</em></h4>
+          <p>A novel I'm writing. [One-line pitch]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p>Interested in working together, or want to talk about any of these projects? I'd like to hear from you.</p>
+      <div class="cta">
+        <!-- EDIT: your email -->
+        <a class="btn primary" href="mailto:you@example.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/YOURPROFILE" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/YOURUSERNAME" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year"></span> Finlay [Surname]</span>
+      <span>Built by hand · Hosted on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
