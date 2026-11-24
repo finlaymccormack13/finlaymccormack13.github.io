@@ -112,7 +112,8 @@
     .ph-flight { background: radial-gradient(ellipse at 50% 55%, #2c5a6e 0 45%, transparent 46%), #0f2430; }
     .ph-vqe { background: repeating-linear-gradient(90deg, transparent 0 38px, color-mix(in srgb, var(--accent) 35%, transparent) 38px 40px), var(--accent-soft); }
     .ph-terrain { background: linear-gradient(180deg, #a9d3f0 0 45%, transparent 45%), radial-gradient(ellipse at 20% 100%, #4c8a4a 0 40%, transparent 41%), radial-gradient(ellipse at 70% 100%, #3d7040 0 50%, transparent 51%), #a9d3f0; }
-    .ph-ray .placeholder, .ph-flight .placeholder, .ph-terrain .placeholder { color: #ffffffcc; background: #00000055; border-radius: 8px; }
+    .ph-orbit { background: radial-gradient(circle at 50% 50%, #ffd36b 0 5%, transparent 5.5%), radial-gradient(circle at 50% 50%, transparent 0 17%, #ffffff30 17.3% 17.8%, transparent 18.1% 29%, #ffffff30 29.3% 29.8%, transparent 30.1% 43%, #ffffff30 43.3% 43.8%, transparent 44.1%), #0d1020; }
+    .ph-ray .placeholder, .ph-flight .placeholder, .ph-terrain .placeholder, .ph-orbit .placeholder { color: #ffffffcc; background: #00000055; border-radius: 8px; }
 
     .body { padding: 32px; display: flex; flex-direction: column; }
     .tag { font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
@@ -176,12 +177,11 @@
     <div class="wrap">
       <div class="eyebrow">Physics · University of Edinburgh</div>
       <!-- EDIT: one sentence that says what you do. Keep it concrete. -->
-      <h1>I build simulations, renderers and tools for seeing physics.</h1>
+      <h1>A portfolio of simulations, tools and some fun bits and pieces.</h1>
       <p class="lede">
         <!-- EDIT: 2–3 sentences. Who you are, what you're good at, what you're looking for. -->
-        I'm a physics student who likes turning equations into working software: from a ray tracer written
-        from scratch in C++ to variational quantum algorithms and live data visualisation.
-        Currently looking for <strong>[internships / graduate roles / research placements]</strong> in [area].
+        I'm a computational physics student who enjoys building and refining systems to make them run effficiently
+        Currently looking for <strong>[internships / graduate roles / research placements]</strong> in Creative Solutions and Problem Solving.
       </p>
       <div class="cta">
         <a class="btn primary" href="#projects">See my work</a>
@@ -197,7 +197,7 @@
   <section id="projects">
     <div class="wrap">
       <h2>Selected projects</h2>
-      <p class="section-sub">Things I've built, and what I learned building them.</p>
+      <p class="section-sub">Here are some things I've built. [THIS SECTION IS UNDERWORKS AND NOT OPERATIONAL]</p>
 
       <div class="projects">
 
@@ -210,7 +210,7 @@
           </div>
           <div class="body">
             <span class="tag">Computer graphics</span>
-            <h3>Physically-based ray tracer in C++</h3>
+            <h3>Optical ray tracer in C++</h3>
             <p>A Whitted-style and distributed ray tracer written from scratch, which loads PBRT-format scenes.</p>
             <ul class="points">
               <!-- EDIT: 2–3 specific things. Numbers and hard problems are more convincing than adjectives. -->
@@ -255,7 +255,7 @@
             <div class="placeholder">add plot → images/vqe.png<br>(energy convergence or phase diagram)</div>
           </div>
           <div class="body">
-            <span class="tag">Quantum computing · Group project</span>
+            <span class="tag">Quantum computing (error mitigation)· part of a Group project</span>
             <h3>VQE on the XXZ spin chain</h3>
             <p>Using the Variational Quantum Eigensolver to find ground states of the XXZ model and detect its phase transitions.</p>
             <ul class="points">
@@ -274,22 +274,24 @@
 
         <!-- PROJECT 4 -->
         <article class="project">
-          <div class="media ph-terrain">
-            <!-- A looping clip works well here:
-                 <video src="images/terrain.mp4" autoplay muted loop playsinline></video> -->
-            <div class="placeholder">add GIF / clip → images/terrain.mp4</div>
+          <div class="media ph-orbit">
+            <!-- Screen-record the animation and add it as a looping clip:
+                 <video src="images/solar-system.mp4" autoplay muted loop playsinline></video> -->
+            <div class="placeholder">add clip → images/solar-system.mp4</div>
           </div>
           <div class="body">
-            <span class="tag">Game development</span>
-            <h3>Procedural 2D terrain in Unity</h3>
-            <p>Procedurally generated 2D worlds.</p>
+            <span class="tag">Computational physics</span>
+            <h3>N-body solar system simulation</h3>
+            <p>A 2D Newtonian simulation of the Sun and eight planets in Python, with an interactive animation
+               (zoom, pan, lock the camera to any body) and four experiments built on top of it.</p>
             <ul class="points">
-              <li>[e.g. Noise functions used and how they're layered]</li>
-              <li>[e.g. Chunking / performance approach]</li>
+              <li>Three integration schemes (Beeman, Euler-Cromer, direct Euler) compared by how well each conserves total energy over long runs</li>
+              <li>Simulated orbital periods of all eight planets measured and checked against NASA values</li>
+              <li>Satellite launches from Earth swept over speed and angle to find the trajectory that gets closest to Mars, and whether it makes it back</li>
             </ul>
-            <div class="stack"><span>C#</span><span>Unity</span></div>
+            <div class="stack"><span>Python</span><span>NumPy</span><span>Matplotlib</span><span>Numerical integration</span></div>
             <div class="links">
-              <a href="#">Play / demo</a>
+              <a href="#">Demo video</a>
               <a href="#">Code</a>
             </div>
           </div>
